@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface AnimalsDao {
 
     @Query("SELECT * FROM animals")
-    suspend fun getAll(): Flow<List<Animal>>
+    fun getAll(): Flow<List<Animal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun add(animal: Animal)
