@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:elevation="16dp"
+    android:layout_margin="@dimen/content_margin">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/content_margin">
+
+        <TextView
+            android:id="@+id/animal_name"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/field_margin"
+            android:background="@color/purple_200"
+            tools:text="Name"/>
+
+        <TextView
+            android:id="@+id/animal_age"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/field_margin"
+            android:background="@color/purple_200"
+            tools:text="Age"/>
+
+        <TextView
+            android:id="@+id/animal_breed"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/purple_200"
+            tools:text="Breed"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

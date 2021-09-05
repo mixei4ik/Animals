@@ -36,5 +36,5 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch { repository.delete(animal) }
     }
 
-    fun <T> Flow<T>.asLiveDataFlow() = shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
+    private fun <T> Flow<T>.asLiveDataFlow() = shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 }
