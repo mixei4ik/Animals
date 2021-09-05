@@ -10,10 +10,12 @@ abstract class AnimalsDatabase: RoomDatabase() {
     abstract val animalsDao: AnimalsDao
 
     companion object {
-        fun create(context: Context) = Room.databaseBuilder(
-            context,
-            AnimalsDatabase::class.java,
-            "animals-database"
-        )
+        fun create(context: Context) = Room
+            .databaseBuilder(
+                context,
+                AnimalsDatabase::class.java,
+                "animals-database"
+            )
+            .build()
     }
 }

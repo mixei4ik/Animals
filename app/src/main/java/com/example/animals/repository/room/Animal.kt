@@ -5,6 +5,7 @@ import androidx.room.*
 @Entity(tableName = "animals")
 data class Animal(
     @PrimaryKey(autoGenerate = true) val id:Int = 0,
+    val caption: String,
     val name: String,
     val age: String,
     val breed: String
