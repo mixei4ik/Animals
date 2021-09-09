@@ -3,4 +3,6 @@
     <string name="breed_hint">Breed</string>
     <string name="age_hint">Age</string>
     <string name="name_hint">Name</string>
+    <string name="add_new_animal_toolbar">Add New Animal</string>
+    <string name="add_button">Add</string>
 </resources>

@@ -1,13 +1,13 @@
 package com.example.animals.ui.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import com.example.animals.R
 import com.example.animals.databinding.MainFragmentBinding
 import com.example.animals.repository.room.Animal
 import com.example.animals.ui.main.adapter.AnimalsAdapter
@@ -23,12 +23,13 @@ class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
     private val adapter: AnimalsAdapter? get() = views { animalsList.adapter as? AnimalsAdapter }
-    private var binding: MainFragmentBinding? = null
+    private var _binding: MainFragmentBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = MainFragmentBinding.inflate(inflater).also { binding = it }.root
+    ): View = MainFragmentBinding.inflate(inflater).also { _binding = it }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,28 +37,30 @@ class MainFragment : Fragment() {
         views {
             animalsList.adapter = AnimalsAdapter()
             SwipeHelper(viewModel::delete).attachToRecyclerView(animalsList)
-            addButton.setOnClickListener { saveAnimal() }
+            addButton.setOnClickListener { openAddNewAnimalFragment() }
         }
 
         viewModel.animals.onEach(::renderAnimals).launchIn(lifecycleScope)
 
     }
 
-    private fun saveAnimal() {
-        views {
-            val nameText = addNameEditText.text.toString().takeIf { it.isNotBlank() }  ?: return@views
-            val ageText = addAgeEditText.text.toString().takeIf { it.isNotBlank() }  ?: return@views
-            val breedText = addBreedEditText.text.toString().takeIf { it.isNotBlank() }  ?: return@views
-
-            viewModel.save(nameText, ageText, breedText)
-        }
+    private fun openAddNewAnimalFragment() {
+        val fragment = AddNewAnimalFragment()
+        activity?.supportFragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.container, fragment)
+            ?.commit()
     }
 
     private fun renderAnimals (animals: List<Animal>) {
         adapter?.submitList(animals)
     }
 
-    private fun <T> views(block: MainFragmentBinding.() -> T): T? = binding?.block()
+    private fun <T> views(block: MainFragmentBinding.() -> T): T? = binding.block()
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
 }
 

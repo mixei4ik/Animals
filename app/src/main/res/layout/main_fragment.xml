@@ -7,73 +7,46 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainFragment">
 
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        tools:ignore="MissingConstraints"
+        android:background="@color/purple_200"
+        android:title="Animals">
+
+        <ImageView
+            android:id="@+id/sortButton"
+            android:layout_width="@dimen/add_animal_button_size"
+            android:layout_height="@dimen/add_animal_button_size"
+            android:src="@drawable/ic_baseline_filter_alt_24"
+            android:scaleType="center"
+            android:layout_gravity="end"/>
+
+    </Toolbar>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/animalsList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="?colorPrimary"
-        app:layout_constraintBottom_toTopOf="@id/addNameEditText"
+        android:background="@color/purple_100"
         android:padding="@dimen/content_margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/animal_list_item"/>
 
-    <EditText
-        android:id="@+id/addNameEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/add_animal_height"
-        android:imeOptions="actionDone"
-        android:background="@null"
-        android:hint="@string/name_hint"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        android:padding="@dimen/content_margin"
-        app:layout_constraintBottom_toTopOf="@id/addAgeEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/addAgeEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/add_animal_height"
-        android:imeOptions="actionDone"
-        android:background="@null"
-        android:hint="@string/age_hint"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        android:padding="@dimen/content_margin"
-        app:layout_constraintBottom_toTopOf="@+id/addBreedEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/addBreedEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/add_animal_height"
-        android:imeOptions="actionDone"
-        android:background="@null"
-        android:hint="@string/breed_hint"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        android:padding="@dimen/content_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addButton"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addButton"
-        android:layout_width="@dimen/add_animal_button_size"
-        android:layout_height="@dimen/add_animal_button_size"
-        android:src="@drawable/ic_baseline_add_24"
-        android:scaleType="center"
-        android:tint="?colorPrimaryVariant"
-        app:layout_constraintStart_toEndOf="@+id/addBreedEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/purple_500"
+        android:clickable="true"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/addBreedEditText"
-        app:layout_constraintBottom_toBottomOf="@+id/addBreedEditText"
-        />
+        app:srcCompat="@android:drawable/ic_input_add"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

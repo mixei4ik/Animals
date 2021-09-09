@@ -17,8 +17,6 @@
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/field_margin"
-            android:background="@color/purple_200"
             tools:text="Name"/>
 
         <TextView
@@ -26,8 +24,6 @@
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/field_margin"
-            android:background="@color/purple_200"
             tools:text="Age"/>
 
         <TextView
@@ -35,7 +31,6 @@
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/purple_200"
             tools:text="Breed"/>
     </LinearLayout>
 

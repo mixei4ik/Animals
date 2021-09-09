@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudioProjects/Animals/app/src/main/res/layout/animal_list_item.xml" value="0.359375" />
+        <entry key="..\:/AndroidStudioProjects/Animals/app/src/main/res/layout/fragment_add_new_animal.xml" value="0.359375" />
+        <entry key="..\:/AndroidStudioProjects/Animals/app/src/main/res/layout/main_activity.xml" value="0.359375" />
         <entry key="..\:/AndroidStudioProjects/Animals/app/src/main/res/layout/main_fragment.xml" value="0.359375" />
       </map>
     </option>
