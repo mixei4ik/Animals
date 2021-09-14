@@ -49,7 +49,7 @@ class AddNewAnimalFragment: Fragment() {
             val ageText = animalAgeHint.text.toString().takeIf { it.isNotBlank() }  ?: return@views
             val breedText = animalBreedHint.text.toString().takeIf { it.isNotBlank() }  ?: return@views
 
-            viewModel.save(nameText, ageText, breedText)
+            viewModel.save(nameText, ageText.toDouble(), breedText)
 
             openMainFragment()
         }

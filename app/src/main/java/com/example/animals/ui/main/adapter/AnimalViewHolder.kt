@@ -16,9 +16,9 @@ class AnimalViewHolder(
     fun onBind(item: Animal) {
         this.item = item
         views {
-            animalName.text = item.name
-            animalAge.text = item.age
-            animalBreed.text = item.breed
+            animalName.text = "Name :  " + item.name
+            animalAge.text = "Age    :  " + item.age.toString()
+            animalBreed.text = "Breed :  " + item.breed
         }
     }
 

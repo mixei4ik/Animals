@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sorting_method">
+        <item>Name</item>
+        <item>Age</item>
+        <item>Breed</item>
+    </string-array>
+    <string-array name="sorting_method_value">
+        <item>name_sort_method</item>
+        <item>age_sort_method</item>
+        <item>breed_sort_method</item>
+        <item>no_sort_method</item>
+    </string-array>
+    <string-array name="choice_database">
+        <item>Room</item>
+        <item>SQLite</item>
+    </string-array>
+</resources>

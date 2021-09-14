@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.preference.PreferenceManager
 import com.example.animals.R
 import com.example.animals.databinding.MainFragmentBinding
 import com.example.animals.repository.room.Animal
 import com.example.animals.ui.main.adapter.AnimalsAdapter
 import com.example.animals.ui.main.adapter.SwipeHelper
+import com.example.animals.ui.main.settings.SettingsFragment
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -26,6 +28,8 @@ class MainFragment : Fragment() {
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
 
+    private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,10 +42,24 @@ class MainFragment : Fragment() {
             animalsList.adapter = AnimalsAdapter()
             SwipeHelper(viewModel::delete).attachToRecyclerView(animalsList)
             addButton.setOnClickListener { openAddNewAnimalFragment() }
+            sortButton.setOnClickListener { openSortByFragment() }
         }
 
-        viewModel.animals.onEach(::renderAnimals).launchIn(lifecycleScope)
+        val sorting = sharedPreferences.getString("sort_by_dialog", "")
+        when (sorting) {
+            "name_sort_method" -> viewModel.animalsSortName.onEach(::renderAnimals).launchIn(lifecycleScope)
+            "age_sort_method" -> viewModel.animalsSortAge.onEach(::renderAnimals).launchIn(lifecycleScope)
+            "breed_sort_method" -> viewModel.animalsSortBreed.onEach(::renderAnimals).launchIn(lifecycleScope)
+            else -> viewModel.animals.onEach(::renderAnimals).launchIn(lifecycleScope)
+        }
+    }
 
+    private fun openSortByFragment() {
+        val fragment = SettingsFragment()
+        activity?.supportFragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.container, fragment)
+            ?.commit()
     }
 
     private fun openAddNewAnimalFragment() {

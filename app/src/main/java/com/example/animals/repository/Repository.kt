@@ -8,9 +8,17 @@ class Repository(
     private val db: AnimalsDatabase,
 ) {
 
+
+
     private val dao get() = db.animalsDao
 
     fun getAll(): Flow<List<Animal>> = dao.getAll()
+
+    fun getAlphabetizedNames(): Flow<List<Animal>> = dao.getAlphabetizedNames()
+
+    fun getAlphabetizedAges(): Flow<List<Animal>> = dao.getAlphabetizedAges()
+
+    fun getAlphabetizedBreeds(): Flow<List<Animal>> = dao.getAlphabetizedBreeds()
 
     suspend fun save(animal: Animal) = dao.add(animal)
 

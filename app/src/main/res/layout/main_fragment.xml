@@ -10,16 +10,19 @@
     <Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="?attr/actionBarSize"
         tools:ignore="MissingConstraints"
         android:background="@color/purple_200"
         android:title="Animals">
 
-        <ImageView
+
+
+        <ImageButton
             android:id="@+id/sortButton"
             android:layout_width="@dimen/add_animal_button_size"
             android:layout_height="@dimen/add_animal_button_size"
-            android:src="@drawable/ic_baseline_filter_alt_24"
+            android:src="@drawable/ic_baseline_settings_24"
+            android:background="@color/purple_200"
             android:scaleType="center"
             android:layout_gravity="end"/>
 

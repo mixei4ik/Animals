@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ListPreference
+        android:key = "sort_by_dialog"
+        android:title = "SortBy"
+        app:useSimpleSummaryProvider = "true"
+        android:entries = "@array/sorting_method"
+        android:entryValues = "@array/sorting_method_value"/>
+
+    <ListPreference
+        android:key = "settings_database_dialog"
+        android:title = "Choice of implementation"
+        app:useSimpleSummaryProvider = "true"
+        android:entries = "@array/choice_database"
+        android:entryValues = "@array/choice_database"
+        android:defaultValue="Room"/>
+
+</androidx.preference.PreferenceScreen>
