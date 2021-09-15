@@ -41,17 +41,15 @@ class MainFragment : Fragment() {
         val sorting = sharedPreferences.getString("sort_by_dialog", "")
         val roomOrSql = sharedPreferences.getString("settings_database_dialog", "")
 
-/*        SwipeHelper(
-            when (roomOrSql) {
-                "Room" -> viewModel::delete
-                "SQLite" -> viewModel::deleteSql
-                else -> viewModel::delete
-            }
-        ).attachToRecyclerView(binding.animalsList)*/
-
-
         views {
             animalsList.adapter = AnimalsAdapter()
+/*            SwipeHelper(
+                when (roomOrSql) {
+                    "Room" -> viewModel::delete
+                    "SQLite" -> viewModel::deleteSql
+                    else -> viewModel::delete
+                }
+            ).attachToRecyclerView(animalsList)*/
             addButton.setOnClickListener { openAddNewAnimalFragment() }
             sortButton.setOnClickListener { openSettingsActivity() }
         }
