@@ -43,6 +43,7 @@ class MainFragment : Fragment() {
 
         views {
             animalsList.adapter = AnimalsAdapter()
+
 /*            SwipeHelper(
                 when (roomOrSql) {
                     "Room" -> viewModel::delete
@@ -50,6 +51,7 @@ class MainFragment : Fragment() {
                     else -> viewModel::delete
                 }
             ).attachToRecyclerView(animalsList)*/
+
             addButton.setOnClickListener { openAddNewAnimalFragment() }
             sortButton.setOnClickListener { openSettingsActivity() }
         }
