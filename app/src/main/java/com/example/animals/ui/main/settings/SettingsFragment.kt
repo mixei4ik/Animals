@@ -1,11 +1,12 @@
 package com.example.animals.ui.main.settings
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.preference.PreferenceFragmentCompat
+import com.example.animals.MainActivity
 import com.example.animals.R
-import com.example.animals.ui.main.MainFragment
 
 class SettingsFragment: PreferenceFragmentCompat() {
 
@@ -18,16 +19,13 @@ class SettingsFragment: PreferenceFragmentCompat() {
 
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                openMainFragment()
+                openMainActivity()
             }
         })
     }
 
-    private fun openMainFragment() {
-        val fragment = MainFragment()
-        activity?.supportFragmentManager
-            ?.beginTransaction()
-            ?.replace(R.id.container, fragment)
-            ?.commit()
+    private fun openMainActivity() {
+        val intent = Intent(activity, MainActivity::class.java)
+        startActivity(intent)
     }
 }

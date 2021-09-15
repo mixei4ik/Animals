@@ -6,13 +6,24 @@
     android:layout_height="match_parent"
     >
 
-    <Toolbar
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/new_animal_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        tools:ignore="MissingConstraints"
-        android:background="@color/purple_200"
-        android:title="@string/add_new_animal_toolbar"/>
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:fitsSystemWindows="true"
+            app:navigationContentDescription="Back"
+            app:navigationIcon="@drawable/ic_baseline_chevron_left_24"
+            app:title="@string/add_new_animal_toolbar" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <EditText

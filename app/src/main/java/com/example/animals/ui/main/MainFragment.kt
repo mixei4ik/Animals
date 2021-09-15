@@ -15,7 +15,6 @@ import com.example.animals.repository.Animal
 import com.example.animals.ui.main.adapter.AnimalsAdapter
 import com.example.animals.ui.main.adapter.SwipeHelper
 import com.example.animals.ui.main.settings.SettingsActivity
-import com.example.animals.ui.main.settings.SettingsFragment
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -74,22 +73,11 @@ class MainFragment : Fragment() {
                 else -> viewModel.animalsSql.onEach(::renderAnimals).launchIn(lifecycleScope)
             }
         }
-
-
     }
 
     private fun openSettingsActivity() {
-
-
-/*        val intent = Intent(activity, SettingsActivity::class.java)
-        startActivity(intent)*/
-
-
-        val fragment = SettingsFragment()
-        activity?.supportFragmentManager
-            ?.beginTransaction()
-            ?.replace(R.id.container, fragment)
-            ?.commit()
+        val intent = Intent(activity, SettingsActivity::class.java)
+        startActivity(intent)
     }
 
     private fun openAddNewAnimalFragment() {

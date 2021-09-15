@@ -29,7 +29,7 @@ class AddNewAnimalFragment: Fragment() {
         views {
             buttonAddAnimal.setOnClickListener { saveAnimal() }
         }
-
+        binding.toolbar.setNavigationOnClickListener { openMainFragment() }
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 openMainFragment()
