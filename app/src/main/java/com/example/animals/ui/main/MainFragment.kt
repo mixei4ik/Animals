@@ -49,6 +49,7 @@ class MainFragment : Fragment() {
             }
         ).attachToRecyclerView(binding.animalsList)*/
 
+
         views {
             animalsList.adapter = AnimalsAdapter()
             addButton.setOnClickListener { openAddNewAnimalFragment() }
