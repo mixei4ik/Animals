@@ -2,7 +2,7 @@ package com.example.animals.ui.main.adapter
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.animals.repository.room.Animal
+import com.example.animals.repository.Animal
 
 class SwipeCallback(
     private val onSwiped: (Animal) -> Unit,

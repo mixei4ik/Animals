@@ -1,6 +1,7 @@
 package com.example.animals.repository.room
 
 import androidx.room.*
+import com.example.animals.repository.Animal
 import kotlinx.coroutines.flow.Flow
 
 @Dao

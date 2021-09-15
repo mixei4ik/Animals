@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.animals.databinding.AnimalListItemBinding
-import com.example.animals.repository.room.Animal
+import com.example.animals.repository.Animal
 
 class AnimalViewHolder(
     private val binding: AnimalListItemBinding,

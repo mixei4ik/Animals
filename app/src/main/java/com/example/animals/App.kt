@@ -3,6 +3,7 @@ package com.example.animals
 import android.app.Application
 import android.content.Context
 import com.example.animals.repository.Repository
+import com.example.animals.repository.sqlite.AnimalsDaoSql
 import com.example.animals.repository.room.AnimalsDatabase
 import kotlin.reflect.KClass
 
@@ -13,7 +14,8 @@ class App: Application() {
 
         ServiceLocator.register<Context>(this)
         ServiceLocator.register(AnimalsDatabase.create(locate()))
-        ServiceLocator.register(Repository(locate()))
+        ServiceLocator.register(AnimalsDaoSql(locate()))
+        ServiceLocator.register(Repository(locate(), locate()))
     }
 }
 
