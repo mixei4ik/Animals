@@ -43,7 +43,6 @@ class MainFragment : Fragment() {
 
         views {
             animalsList.adapter = AnimalsAdapter()
-
             SwipeHelper(
                 when (roomOrSql) {
                     "Room" -> viewModel::delete
