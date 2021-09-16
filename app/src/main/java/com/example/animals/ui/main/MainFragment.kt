@@ -44,13 +44,13 @@ class MainFragment : Fragment() {
         views {
             animalsList.adapter = AnimalsAdapter()
 
-/*            SwipeHelper(
+            SwipeHelper(
                 when (roomOrSql) {
                     "Room" -> viewModel::delete
                     "SQLite" -> viewModel::deleteSql
                     else -> viewModel::delete
                 }
-            ).attachToRecyclerView(animalsList)*/
+            ).attachToRecyclerView(animalsList)
 
             addButton.setOnClickListener { openAddNewAnimalFragment() }
             sortButton.setOnClickListener { openSettingsActivity() }
