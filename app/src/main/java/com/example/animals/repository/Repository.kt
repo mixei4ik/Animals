@@ -1,40 +1,56 @@
 package com.example.animals.repository
 
-import com.example.animals.repository.sqlite.AnimalsDaoSql
+import android.app.Application
+import androidx.preference.PreferenceManager
 import com.example.animals.repository.room.AnimalsDatabase
+import com.example.animals.repository.sqlite.AnimalsDaoSql
 import kotlinx.coroutines.flow.Flow
 
 class Repository(
     private val db: AnimalsDatabase,
-    private val daoSql: AnimalsDaoSql
+    private val daoSql: AnimalsDaoSql,
+    private val application: Application
 ) {
-
-
 
     private val dao get() = db.animalsDao
 
-    fun getAll(): Flow<List<Animal>> = dao.getAll()
+    private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(application) }
+    val sorting = sharedPreferences.getString("sort_by_dialog", "")
+    val roomOrSql = sharedPreferences.getString("settings_database_dialog", "")
 
-    fun getAlphabetizedNames(): Flow<List<Animal>> = dao.getAlphabetizedNames()
+    fun getAll(): Flow<List<Animal>> = when (roomOrSql) {
+        "Room" ->
+            when (sorting) {
+                "name_sort_method" -> dao.getAlphabetizedNames()
+                "age_sort_method" -> dao.getAlphabetizedAges()
+                "breed_sort_method" -> dao.getAlphabetizedBreeds()
+                else -> dao.getAll()
+            }
 
-    fun getAlphabetizedAges(): Flow<List<Animal>> = dao.getAlphabetizedAges()
+        "SQLite" ->
+            when (sorting) {
+                "name_sort_method" -> daoSql.getAlphabetizedNamesSql()
+                "age_sort_method" -> daoSql.getAlphabetizedAgesSql()
+                "breed_sort_method" -> daoSql.getAlphabetizedBreedsSql()
+                else -> daoSql.getAllSql()
+            }
+        else -> when (sorting) {
+            "name_sort_method" -> dao.getAlphabetizedNames()
+            "age_sort_method" -> dao.getAlphabetizedAges()
+            "breed_sort_method" -> dao.getAlphabetizedBreeds()
+            else -> dao.getAll()
+        }
+    }
 
-    fun getAlphabetizedBreeds(): Flow<List<Animal>> = dao.getAlphabetizedBreeds()
+    suspend fun save(animal: Animal) = when(roomOrSql) {
+        "Room" -> dao.add(animal)
+        "SQLite" -> daoSql.addSql(animal)
+        else -> dao.add(animal)
+    }
 
-    suspend fun save(animal: Animal) = dao.add(animal)
-
-    suspend fun delete(animal: Animal) = dao.delete(animal)
-
-    fun getAllSql(): Flow<List<Animal>> = daoSql.getAllSql()
-
-    fun getAlphabetizedNamesSql(): Flow<List<Animal>> = daoSql.getAlphabetizedNamesSql()
-
-    fun getAlphabetizedAgesSql(): Flow<List<Animal>> = daoSql.getAlphabetizedAgesSql()
-
-    fun getAlphabetizedBreedsSql(): Flow<List<Animal>> = daoSql.getAlphabetizedBreedsSql()
-
-    suspend fun saveSql(animal: Animal) = daoSql.addSql(animal)
-
-    suspend fun deleteSql(animal: Animal) = daoSql.deleteSql(animal)
-
+    suspend fun delete(animal: Animal) = when(roomOrSql) {
+        "Room" -> dao.delete(animal)
+        "SQLite" -> daoSql.addSql(animal)
+        else -> dao.delete(animal)
+    }
 }

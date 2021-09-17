@@ -15,7 +15,7 @@ class App: Application() {
         ServiceLocator.register<Context>(this)
         ServiceLocator.register(AnimalsDatabase.create(locate()))
         ServiceLocator.register(AnimalsDaoSql(locate()))
-        ServiceLocator.register(Repository(locate(), locate()))
+        ServiceLocator.register(Repository(locate(), locate(), applicationContext as Application))
     }
 }
 

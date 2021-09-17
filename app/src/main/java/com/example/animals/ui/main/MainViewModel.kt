@@ -15,21 +15,9 @@ class MainViewModel : ViewModel() {
     private val repository: Repository by locateLazy()
 
     val animals = repository.getAll().asLiveDataFlow()
-    val animalsSortName = repository.getAlphabetizedNames().asLiveDataFlow()
-    val animalsSortAge = repository.getAlphabetizedAges().asLiveDataFlow()
-    val animalsSortBreed = repository.getAlphabetizedBreeds().asLiveDataFlow()
-
-    val animalsSql = repository.getAllSql().asLiveDataFlow()
-    val animalsSortNameSql = repository.getAlphabetizedNamesSql().asLiveDataFlow()
-    val animalsSortAgeSql = repository.getAlphabetizedAgesSql().asLiveDataFlow()
-    val animalsSortBreedSql = repository.getAlphabetizedBreedsSql().asLiveDataFlow()
 
     fun save(name: String, age: Double, breed: String) {
         viewModelScope.launch { repository.save(createAnimal(name, age, breed)) }
-    }
-
-    fun saveSql(name: String, age: Double, breed: String) {
-        viewModelScope.launch { repository.saveSql(createAnimal(name, age, breed)) }
     }
 
     private fun createAnimal(name: String, age: Double, breed: String) = Animal(
@@ -40,10 +28,6 @@ class MainViewModel : ViewModel() {
 
     fun delete(animal: Animal) {
         viewModelScope.launch { repository.delete(animal) }
-    }
-
-    fun deleteSql(animal: Animal) {
-        viewModelScope.launch { repository.deleteSql(animal) }
     }
 
     private fun <T> Flow<T>.asLiveDataFlow() =

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.PreferenceManager
 import com.example.animals.R
 import com.example.animals.databinding.MainFragmentBinding
 import com.example.animals.repository.Animal
@@ -28,7 +27,7 @@ class MainFragment : Fragment() {
     private val adapter: AnimalsAdapter? get() = views { animalsList.adapter as? AnimalsAdapter }
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
-    private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,40 +37,15 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sorting = sharedPreferences.getString("sort_by_dialog", "")
-        val roomOrSql = sharedPreferences.getString("settings_database_dialog", "")
-
         views {
             animalsList.adapter = AnimalsAdapter()
-            SwipeHelper(
-                when (roomOrSql) {
-                    "Room" -> viewModel::delete
-                    "SQLite" -> viewModel::deleteSql
-                    else -> viewModel::delete
-                }
-            ).attachToRecyclerView(animalsList)
+            SwipeHelper(viewModel::delete).attachToRecyclerView(animalsList)
 
             addButton.setOnClickListener { openAddNewAnimalFragment() }
             sortButton.setOnClickListener { openSettingsActivity() }
         }
 
-        when (roomOrSql) {
-            "Room" ->
-                when (sorting) {
-                    "name_sort_method" -> viewModel.animalsSortName.onEach(::renderAnimals).launchIn(lifecycleScope)
-                    "age_sort_method" -> viewModel.animalsSortAge.onEach(::renderAnimals).launchIn(lifecycleScope)
-                    "breed_sort_method" -> viewModel.animalsSortBreed.onEach(::renderAnimals).launchIn(lifecycleScope)
-                    else -> viewModel.animals.onEach(::renderAnimals).launchIn(lifecycleScope)
-                }
-
-            "SQLite" ->
-                when (sorting) {
-                "name_sort_method" -> viewModel.animalsSortNameSql.onEach(::renderAnimals).launchIn(lifecycleScope)
-                "age_sort_method" -> viewModel.animalsSortAgeSql.onEach(::renderAnimals).launchIn(lifecycleScope)
-                "breed_sort_method" -> viewModel.animalsSortBreedSql.onEach(::renderAnimals).launchIn(lifecycleScope)
-                else -> viewModel.animalsSql.onEach(::renderAnimals).launchIn(lifecycleScope)
-            }
-        }
+        viewModel.animals.onEach(::renderAnimals).launchIn(lifecycleScope)
     }
 
     private fun openSettingsActivity() {

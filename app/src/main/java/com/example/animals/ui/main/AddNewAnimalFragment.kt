@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.preference.PreferenceManager
 import com.example.animals.R
 import com.example.animals.databinding.FragmentAddNewAnimalBinding
 
@@ -15,7 +14,6 @@ class AddNewAnimalFragment: Fragment() {
     private val viewModel: MainViewModel by viewModels()
     private var _binding: FragmentAddNewAnimalBinding? = null
     private val binding get() = _binding!!
-    private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,12 +49,7 @@ class AddNewAnimalFragment: Fragment() {
             val ageText = animalAgeHint.text.toString().takeIf { it.isNotBlank() }  ?: return@views
             val breedText = animalBreedHint.text.toString().takeIf { it.isNotBlank() }  ?: return@views
 
-            val roomOrSql = sharedPreferences.getString("settings_database_dialog", "")
-
-            when (roomOrSql) {
-                "Room" -> viewModel.save(nameText, ageText.toDouble(), breedText)
-                "SQLite" -> viewModel.saveSql(nameText, ageText.toDouble(), breedText)
-            }
+            viewModel.save(nameText, ageText.toDouble(), breedText)
             openMainFragment()
         }
     }
