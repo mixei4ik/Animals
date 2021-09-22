@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.animals.R
 import com.example.animals.databinding.MainFragmentBinding
+import com.example.animals.locateLazy
 import com.example.animals.repository.Animal
+import com.example.animals.repository.Repository
 import com.example.animals.ui.main.adapter.AnimalsAdapter
 import com.example.animals.ui.main.adapter.SwipeHelper
 import com.example.animals.ui.main.settings.SettingsActivity
@@ -23,6 +25,7 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
+    private val repository: Repository by locateLazy()
     private val viewModel: MainViewModel by viewModels()
     private val adapter: AnimalsAdapter? get() = views { animalsList.adapter as? AnimalsAdapter }
     private var _binding: MainFragmentBinding? = null
@@ -36,6 +39,8 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        repository.preferences.registerOnSharedPreferenceChangeListener(repository.preferencesListener)
 
         views {
             animalsList.adapter = AnimalsAdapter()
@@ -61,7 +66,7 @@ class MainFragment : Fragment() {
             ?.commit()
     }
 
-    private fun renderAnimals (animals: List<Animal>) {
+    private fun renderAnimals(animals: List<Animal>) {
         adapter?.submitList(animals)
     }
 
@@ -70,6 +75,7 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+        repository.preferences.unregisterOnSharedPreferenceChangeListener(repository.preferencesListener)
     }
 }
 
